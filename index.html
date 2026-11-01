@@ -99,7 +99,9 @@ button{cursor:pointer}
 .ab-user{margin-left:auto;display:flex;align-items:center;gap:8px;color:#fff;font-size:13.5px;font-weight:600;min-width:0}
 .ab-user .av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:14px;color:#fff;background:linear-gradient(135deg,#2E6FC4,#6B3F95,#B12B79);border:2px solid rgba(255,255,255,.5);flex-shrink:0}
 .ab-user .nm{overflow:hidden;text-overflow:ellipsis}
-.ab-out{border:1px solid rgba(255,255,255,.35);background:none;color:#fff;border-radius:999px;padding:6px 12px;font-size:12.5px;white-space:nowrap}
+.ab-out{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.35);background:none;color:#fff;border-radius:999px;padding:6px 12px;font-size:12.5px;white-space:nowrap}
+.ab-out svg{width:15px;height:15px}
+.ab-out .sh{display:none}
 .ab-out:hover{border-color:#fff;background:rgba(255,255,255,.08)}
 .tab .sh{display:none}
 .tabhome{display:inline-flex;align-items:center;gap:6px;flex-shrink:0;border:0;background:var(--navy2);color:#fff;border-radius:10px;padding:7px 11px;margin-right:6px;font-weight:600;font-size:13px}
@@ -315,7 +317,10 @@ mark{background:linear-gradient(transparent 52%,var(--hl) 52%);color:var(--hlink
 /* ---------- PHONE: rows become cards ---------- */
 @media (max-width:760px){
   .appbar{padding-top:10px;gap:8px}
-  .ab-user .nm,.ab-out{display:none}
+  .ab-user .nm{display:none}
+  .ab-out{padding:7px 11px;font-size:13px}
+  .ab-out .lg{display:none}
+  .ab-out .sh{display:inline}
   .deckpill{font-size:12px;padding:5px 10px}
   .userbox{display:none}
   .tabs-bar .sync span{display:none}
@@ -403,7 +408,7 @@ mark{background:linear-gradient(transparent 52%,var(--hl) 52%);color:var(--hlink
   <div class="appbar">
     <button class="homebtn" type="button" id="homeBtn" title="กลับหน้าเลือกชุดคำ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></svg>หน้าแรก</button>
     <span class="deckpill" id="abDeck"><i></i><span>Oxford</span></span>
-    <div class="ab-user"><span class="av" id="abAv">?</span><span class="nm" id="abName"></span><button class="ab-out" type="button" id="abLogout">ออกจากระบบ</button></div>
+    <div class="ab-user"><span class="av" id="abAv">?</span><span class="nm" id="abName"></span><button class="ab-out" type="button" id="abLogout" aria-label="ออกจากระบบ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l-5-5 5-5"/><path d="M5 12h11"/></svg><span class="lg">ออกจากระบบ</span><span class="sh">ออก</span></button></div>
   </div>
   <div class="wrap">
     <div class="orb-box" title="เหลี่ยมของลูกแก้วสว่างขึ้นตามคำที่จำได้">
@@ -494,7 +499,7 @@ mark{background:linear-gradient(transparent 52%,var(--hl) 52%);color:var(--hlink
   </section>
 
   <div class="foot">
-    <span>รายการคำจาก The Oxford 3000™ และ 5000™ by CEFR level (© Oxford University Press) “TOEFL Words You Must Know” (PrepScholar) และ “Essential Words for CU-TEP 80+” (English Me Up) ใช้เฉพาะรายการคำ · คำแปลและตัวอย่างจัดทำเพื่อการเรียนส่วนตัว · <span id="ver">V3.5</span></span>
+    <span>รายการคำจาก The Oxford 3000™ และ 5000™ by CEFR level (© Oxford University Press) “TOEFL Words You Must Know” (PrepScholar) และ “Essential Words for CU-TEP 80+” (English Me Up) ใช้เฉพาะรายการคำ · คำแปลและตัวอย่างจัดทำเพื่อการเรียนส่วนตัว · <span id="ver">V3.6</span></span>
     <span style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span id="backupBox" hidden style="display:inline-flex;gap:6px"><button class="btn" id="expBtn">สำรองความคืบหน้า (.json)</button><label class="btn" style="cursor:pointer">นำเข้าไฟล์สำรอง<input type="file" id="impFile" accept=".json,application/json" hidden></label></span><span id="resetBox"><button class="btn" id="resetBtn">ล้างความคืบหน้า</button></span></span>
   </div>
 </main>
@@ -509,7 +514,7 @@ var RAW_CU = [[1,"abduct","v.","CU",["ลักพาตัว","พาตัว
 <script>
 (function(){
 'use strict';
-var APP_VERSION='V3.5';
+var APP_VERSION='V3.6';
 /* ---------- word sets: progress is kept per set ---------- */
 var DECKS={
   oxford:{id:'oxford',raw:RAW_OX,short:'Oxford',title:'Oxford 5000',suffix:'',lists:true,
